@@ -4,8 +4,8 @@ import Tours from "./Tours";
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
 // const url = "https://course-api.com/react-tours-project";
-const url = "https://my-json-server.typicode.com/lucho20pt/my-json-server/tours";
-
+const url =
+  "https://my-json-server.typicode.com/lucho20pt/my-json-server/tours";
 
 function App() {
   //
@@ -18,12 +18,12 @@ function App() {
     try {
       const result = await fetch(url);
       const data = await result.json();
-      console.log(data);
+      // console.log(data);
+      setLoading(false);
       setTours(data);
-      setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      console.log(error);
     }
   };
 
