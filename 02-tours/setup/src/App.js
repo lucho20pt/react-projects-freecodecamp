@@ -14,7 +14,7 @@ function App() {
 
   // remove Tour
   const removeTourHandler = (id) => {
-    console.log(id)
+    console.log(id);
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   };
@@ -42,7 +42,7 @@ function App() {
     };
   }, []);
 
-  // loading
+  // if loading
   if (loading) {
     return (
       <main>
@@ -51,6 +51,22 @@ function App() {
     );
   }
 
+  // if empty
+  if (tours.length === 0) {
+    return (
+      <main>
+        <div className="title">
+          <h2>No tours left...</h2>
+          <div className="underline"></div>
+          <button className="btn" onClick={fetchTours}>
+            Refresh Tours List
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  // MAIN
   return (
     <main>
       <Tours tours={tours} removeTour={removeTourHandler} />
