@@ -4,6 +4,7 @@ import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa";
 
 const Review = () => {
   //
+
   const [index, setIndex] = useState(0);
   const { name, image, job, text } = people[index];
   // const max = people.length - 1;
@@ -31,6 +32,16 @@ const Review = () => {
     });
   };
 
+  // random
+  const randomPerson = () => {
+    let randomNum = Math.floor(Math.random() * people.length);
+    // if (index === randomNum && index > 0) setIndex(randomNum - 1);
+    // else if (index === randomNum && index === 0) setIndex(randomNum + 1);
+    // else setIndex(randomNum);
+    if (randomNum === index) randomNum = index + 1;
+    setIndex(checkNum(randomNum));
+  };
+
   return (
     <article className="review">
       <div className="img-container">
@@ -50,6 +61,9 @@ const Review = () => {
           <FaChevronRight />
         </button>
       </div>
+      <button className="random-btn" onClick={randomPerson}>
+        surprise me
+      </button>
     </article>
   );
 };
