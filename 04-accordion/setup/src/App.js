@@ -5,19 +5,18 @@ import SingleQuestion from "./Question";
 function App() {
   //
   // console.log(data);
-  // const list = data;
-  const [list, setList] = useState(data)
+  const [questions, setList] = useState(data)
 
   return (
     <main>
-      <section className="container">
+      <div className="container">
         <h3>questions and answers about login</h3>
-        <div>
-          {list.map((item) => (
-            <SingleQuestion key={item.id} {...item} />
-          ))}
-        </div>
-      </section>
+        <section className="info">
+          {questions.map((question) => {
+            return <SingleQuestion key={question.id} {...question} />
+          })}
+        </section>
+      </div>
     </main>
   );
 }
