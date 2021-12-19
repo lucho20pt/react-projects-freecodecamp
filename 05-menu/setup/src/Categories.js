@@ -4,8 +4,11 @@ const Categories = ({ filterItems }) => {
   //
   return (
     <section className="btn-container">
+      <button className="filter-btn" onClick={() => filterItems("all")}>
+        All
+      </button>
       <button className="filter-btn" onClick={() => filterItems("breakfast")}>
-        breakfast
+        Breakfast
       </button>
     </section>
   );

@@ -19,6 +19,10 @@ function App() {
   const [categories, setCategories] = useState([]);
   // console.log(categories);
   const filterItems = (category) => {
+    if(category === "all"){
+      console.log(items);
+      return setMenuItems(items);
+    }
     const newItems = items.filter((item) => item.category === category);
     console.log(newItems);
     setMenuItems(newItems);
