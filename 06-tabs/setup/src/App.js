@@ -7,9 +7,10 @@ const url = "https://my-json-server.typicode.com/lucho20pt/my-json-server/tabs";
 
 function App() {
   //
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(1);
+  
 
   // fetch
   const fetchData = async () => {
@@ -43,7 +44,9 @@ function App() {
     );
   }
 
+  
   // main
+  const { company, dates, duties, title } = jobs[value];
   return (
     <section className="section">
       <div className="title">
@@ -61,7 +64,7 @@ function App() {
                 onClick={() => {
                   setValue(index);
                 }}
-                className={`job-btn ${index == value ? 'active-btn' : ''}`}
+                className={`job-btn ${index == value ? "active-btn" : ""}`}
               >
                 {item.company}
               </button>
@@ -70,29 +73,20 @@ function App() {
         </div>
 
         {/* job info */}
-        {jobs.map((job, index) => {
-          const { company, dates, title } = job;
-          // console.log(job);
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
 
-          if (value === index) {
+          {duties.map((dutie, index) => {
             return (
-              <article className="job-info" key={index}>
-                <h3>{title}</h3>
-                <h4>{company}</h4>
-                <p className="job-date">{dates}</p>
-
-                {job.duties.map((dutie, index) => {
-                  return (
-                    <div className="job-desc" key={index}>
-                      <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
-                      <p>{dutie}</p>
-                    </div>
-                  );
-                })}
-              </article>
+              <div className="job-desc" key={index}>
+                <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                <p>{dutie}</p>
+              </div>
             );
-          }
-        })}
+          })}
+        </article>
       </div>
 
       <button type="button" className="btn">
