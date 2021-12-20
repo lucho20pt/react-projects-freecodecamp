@@ -10,7 +10,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [value, setValue] = useState(1);
-  
 
   // fetch
   const fetchData = async () => {
@@ -44,7 +43,6 @@ function App() {
     );
   }
 
-  
   // main
   const { company, dates, duties, title } = jobs[value];
   return (
@@ -64,7 +62,7 @@ function App() {
                 onClick={() => {
                   setValue(index);
                 }}
-                className={`job-btn ${index == value ? "active-btn" : ""}`}
+                className={`job-btn ${index === value ? "active-btn" : ""}`}
               >
                 {item.company}
               </button>
