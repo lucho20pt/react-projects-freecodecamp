@@ -9,7 +9,7 @@ function App() {
   //
   const [loading, setLoading] = useState(false);
   const [jobs, setJobs] = useState([]);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(2);
 
   // fetch
   const fetchData = async () => {
@@ -54,12 +54,24 @@ function App() {
       <div className="jobs-center">
         {/* btn container */}
         <div className="btn-container">
-          <button className={"job-btn active-btn"}>item.company</button>
+          {jobs.map((item, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => {
+                  setValue(index);
+                }}
+                className={`job-btn ${index == value ? 'active-btn' : ''}`}
+              >
+                {item.company}
+              </button>
+            );
+          })}
         </div>
 
         {/* job info */}
         {jobs.map((job, index) => {
-          const { company, dates, duties, id, order, title } = job;
+          const { company, dates, title } = job;
           // console.log(job);
 
           if (value === index) {
@@ -79,11 +91,6 @@ function App() {
                 })}
               </article>
             );
-          }
-          else{
-            <article className="job-info">
-              <h3>no jobs...</h3>
-            </article>
           }
         })}
       </div>
