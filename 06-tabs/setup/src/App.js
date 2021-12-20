@@ -6,6 +6,44 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 const url = "https://my-json-server.typicode.com/lucho20pt/my-json-server/tabs";
 
 function App() {
+  //
+  const [loading, setLoading] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const { company, dates, duties, id, order, title } = jobs;
+
+  // fetch
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const result = await fetch(url);
+      const data = await result.json();
+      console.log(data);
+      setJobs(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log('error ', error);
+    }
+  };
+
+  // useEffect
+  useEffect(() => {
+    fetchData();
+    return () => {
+      console.log("cleanup");
+    };
+  }, []);
+
+  // loading
+  if (loading) {
+    return (
+      <section className="section loading">
+        <h1>Loading...</h1>
+      </section>
+    );
+  }
+  
+  // main
   return (
     <section className="section">
       <div className="title">
@@ -14,7 +52,6 @@ function App() {
       </div>
 
       <div className="jobs-center">
-
         {/* btn container */}
         <div className="btn-container">
           <button className={"job-btn active-btn"}>item.company</button>
@@ -31,13 +68,11 @@ function App() {
             <p>jobs</p>
           </div>
         </article>
-
       </div>
 
       <button type="button" className="btn">
         more info
       </button>
-
     </section>
   );
 }
