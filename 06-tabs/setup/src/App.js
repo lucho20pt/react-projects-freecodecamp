@@ -60,7 +60,7 @@ function App() {
         {/* job info */}
         {jobs.map((job, index) => {
           const { company, dates, duties, id, order, title } = job;
-          console.log(job);
+          // console.log(job);
 
           if (value === index) {
             return (
@@ -69,12 +69,21 @@ function App() {
                 <h4>{company}</h4>
                 <p className="job-date">{dates}</p>
 
-                <div className="job-desc">
-                  <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
-                  <p>jobs</p>
-                </div>
+                {job.duties.map((dutie, index) => {
+                  return (
+                    <div className="job-desc" key={index}>
+                      <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                      <p>{dutie}</p>
+                    </div>
+                  );
+                })}
               </article>
             );
+          }
+          else{
+            <article className="job-info">
+              <h3>no jobs...</h3>
+            </article>
           }
         })}
       </div>
