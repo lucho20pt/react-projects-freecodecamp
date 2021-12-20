@@ -9,7 +9,7 @@ function App() {
   //
   const [loading, setLoading] = useState(false);
   const [jobs, setJobs] = useState([]);
-  const { company, dates, duties, id, order, title } = jobs;
+  const [value, setValue] = useState(0);
 
   // fetch
   const fetchData = async () => {
@@ -17,12 +17,12 @@ function App() {
     try {
       const result = await fetch(url);
       const data = await result.json();
-      console.log(data);
+      // console.log(data);
       setJobs(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log('error ', error);
+      console.log("error ", error);
     }
   };
 
@@ -42,7 +42,7 @@ function App() {
       </section>
     );
   }
-  
+
   // main
   return (
     <section className="section">
@@ -58,16 +58,25 @@ function App() {
         </div>
 
         {/* job info */}
-        <article className="job-info">
-          <h3>title</h3>
-          <h4>company</h4>
-          <p className="job-date">dates</p>
+        {jobs.map((job, index) => {
+          const { company, dates, duties, id, order, title } = job;
+          console.log(job);
 
-          <div className="job-desc">
-            <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
-            <p>jobs</p>
-          </div>
-        </article>
+          if (value === index) {
+            return (
+              <article className="job-info" key={index}>
+                <h3>{title}</h3>
+                <h4>{company}</h4>
+                <p className="job-date">{dates}</p>
+
+                <div className="job-desc">
+                  <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                  <p>jobs</p>
+                </div>
+              </article>
+            );
+          }
+        })}
       </div>
 
       <button type="button" className="btn">
