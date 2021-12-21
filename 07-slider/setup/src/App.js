@@ -17,7 +17,15 @@ function App() {
     setIndex(index + 1);
   };
 
-  
+  // check index
+  useEffect(() => {
+    const lastIndex = people.length - 1;
+    if (index > lastIndex) setIndex(0);
+    if (index < 0) setIndex(lastIndex);
+    return () => {
+      console.log("cleanup check index");
+    };
+  }, [index, people]);
 
   // main
   return (
