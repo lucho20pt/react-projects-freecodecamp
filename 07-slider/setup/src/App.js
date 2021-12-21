@@ -27,6 +27,17 @@ function App() {
     };
   }, [index, people]);
 
+  // slider auto
+  useEffect(() => {
+    const slider = setInterval(() => {
+      setIndex(index + 1);
+    }, 4000);
+    return () => {
+      console.log("cleanup interval");
+      clearInterval(slider);
+    };
+  }, [index]);
+
   // main
   return (
     <section className="section">
