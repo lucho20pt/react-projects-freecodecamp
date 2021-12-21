@@ -8,7 +8,14 @@ function App() {
   const [people, setPeople] = useState(data);
   const [index, setIndex] = useState(0);
 
-  
+  // prev
+  const prevHandler = () => {
+    setIndex(index - 1);
+  };
+  // next
+  const nextHandler = () => {
+    setIndex(index + 1);
+  };
 
   
 
@@ -41,10 +48,10 @@ function App() {
           );
         })}
 
-        <button className="prev">
+        <button className="prev" onClick={prevHandler}>
           <FiChevronLeft />
         </button>
-        <button className="next">
+        <button className="next" onClick={nextHandler}>
           <FiChevronRight />
         </button>
       </div>
