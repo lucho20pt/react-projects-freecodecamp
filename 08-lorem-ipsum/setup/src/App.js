@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import data from './data';
+import React, { useState } from "react";
+import data from "./data";
 function App() {
-  
-  
   return (
-  <h2>lorem ipsum project setup</h2>
-    )
+    <section className="section-center">
+      <h3>tired of boring lorem ipsum?</h3>
+      <form className="lorem-form">
+        <label htmlFor="amount">paragraphs:</label>
+        <input type="number" name="amount" id="amount" value="" />
+        <button className="btn">generate</button>
+      </form>
+      <article className="lorem-text">
+        <p>item</p>
+      </article>
+    </section>
+  );
 }
 
 export default App;
