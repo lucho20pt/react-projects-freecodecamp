@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import rgbToHex from "./utils";
 
-const SingleColor = ({ index, rgb, weight }) => {
+const SingleColor = ({ rgb, weight, type }) => {
   //
   const background = rgb.join(",");
   const hexColor = rgbToHex(...rgb);
@@ -30,7 +30,7 @@ const SingleColor = ({ index, rgb, weight }) => {
   return (
     <article
       onClick={clipboardHandler}
-      className={`color ${index > 10 ? "color-light" : null}`}
+      className={`color ${type === 'shade' ? "color-light" : null}`}
       style={{ backgroundColor: `rgb(${background})` }}
     >
       <p className="percent-value">{weight}%</p>
