@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import rgbToHex from "./utils";
 
-const SingleColor = ({ index, alpha, rgb, type, weight }) => {
+const SingleColor = ({ index, rgb, weight }) => {
   //
   const background = rgb.join(",");
   const hexColor = rgbToHex(...rgb);
   const [alert, setAlert] = useState(false);
-
+  
+  // copy to clipboard
   const clipboardHandler = () => {
     const copy = navigator.clipboard.writeText(hexColor);
     setAlert(true);
     return copy;
   };
 
+  // setTimeout
   useEffect(() => {
     const timeout = setTimeout(() => {
       setAlert(false);
