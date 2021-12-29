@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-const Alert = ({msg, type}) => {
+const Alert = ({type, msg}) => {
   return <p className={`alert alert-${type}`}>{msg}</p>;
 }
 

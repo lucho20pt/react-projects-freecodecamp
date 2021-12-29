@@ -5,18 +5,30 @@ import Alert from "./Alert";
 function App() {
   // states
   const [name, setName] = useState("");
-  const [list, setList] = useState([{ id: 123, title: "item 1" }, { id: 321, title: "item 2" }]);
+  const [list, setList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({
     show: false,
-    msg: "message",
-    type: "danger",
+    type: "",
+    msg: "",
   });
 
   // submit
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    if (!name) {
+      // setAlert({ show: true, type: "danger", msg: "message" });
+      showAlert(true, "danger", "please enter a grocery item name");
+    } else if (!name && isEditing) {
+    }
+    console.log("name");
+  };
+
+  // show Alert params
+  const showAlert = (show = false, type = "", msg = "") => {
+    return setAlert({ show, type, msg });
   };
 
   return (
@@ -25,7 +37,13 @@ function App() {
         {alert.show && <Alert {...alert} />}
         <h3>grocery bud</h3>
         <div className="form-control">
-          <input type="text" className="grocery" placeholder="e.g. eggs" />
+          <input
+            type="text"
+            className="grocery"
+            placeholder="e.g. eggs"
+            onChange={(e) => setName(e.target.value)}
+          />
+
           <button type="submit" className="submit-btn">
             {isEditing ? "edit" : "submit"}
           </button>
@@ -33,7 +51,7 @@ function App() {
       </form>
 
       <div className="grocery-container">
-        { list && <List items={list} />}
+        {list.length > 0 && <List items={list} />}
         <button className="clear-btn">clear items</button>
       </div>
     </section>
