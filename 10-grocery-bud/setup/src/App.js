@@ -36,6 +36,7 @@ function App() {
       setIsEditing(false);
       setEditID(null);
       setName("");
+      showAlert(true, 'success', 'item updated');
       //
     } else {
       // console.log("add->", name);
