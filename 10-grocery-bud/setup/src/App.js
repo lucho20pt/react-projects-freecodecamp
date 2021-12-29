@@ -17,10 +17,10 @@ function App() {
   // submit
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    
+
     if (!name) {
       // setAlert({ show: true, type: "danger", msg: "message" });
-      showAlert(true, "danger", "please enter a grocery item");
+      showAlert(true, "danger", "please enter a grocery item name");
       console.log("empty field");
       //
     } else if (name && isEditing) {
@@ -42,15 +42,23 @@ function App() {
     return setAlert({ show, type, msg });
   };
 
+  // clear Alert
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      showAlert();
+    }, 2500);
+    return () => clearTimeout(timeout);
+  }, [alert]);
+
   return (
     <section className="section-center">
       <form className="grocery-form" onSubmit={onSubmitHandler}>
-        {alert.show && <Alert {...alert} />}
         <h3>grocery bud</h3>
+        {alert.show && <Alert {...alert} />}
         <div className="form-control">
           <input
             type="text"
-            className="grocery"
+            className={`grocery ${alert.show && 'error'}`}
             placeholder="e.g. eggs"
             value={name}
             onChange={(e) => setName(e.target.value)}
