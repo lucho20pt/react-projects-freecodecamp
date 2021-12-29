@@ -5,16 +5,16 @@ import Alert from "./Alert";
 function App() {
   // states
   const [name, setName] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([{ id: "01", title: "first item" }]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({
-    show: false,
+    show: null,
     type: "",
     msg: "",
   });
 
-  // submit
+  // on SUBMIT
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -24,7 +24,8 @@ function App() {
       console.log("empty field");
       //
     } else if (name && isEditing) {
-      console.log("edit->", name);
+      console.log("edit->", name, editID);
+
       //
     } else {
       // console.log("add->", name);
@@ -34,6 +35,16 @@ function App() {
       setList(newList);
       showAlert(true, "success", "new grocery item added");
       setName("");
+    }
+  };
+
+  // REMOVE Item
+  const removeItemHandler = (id) => {
+    if (window.confirm("Are you sure you want to delete Grocery Item?")) {
+      // Save it!
+      const newList = list.filter((item) => item.id !== id);
+      showAlert(true, "danger", "item removed");
+      setList(newList);
     }
   };
 
@@ -58,7 +69,8 @@ function App() {
         <div className="form-control">
           <input
             type="text"
-            className={`grocery ${alert.show && 'error'}`}
+            // className={`grocery ${alert.show === false && "error"}`}
+            className={`grocery`}
             placeholder="e.g. eggs"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -71,7 +83,9 @@ function App() {
       </form>
 
       <div className="grocery-container">
-        {list.length > 0 && <List items={list} />}
+        {list.length > 0 && (
+          <List items={list} removeItem={removeItemHandler} />
+        )}
         <button className="clear-btn">clear items</button>
       </div>
     </section>
