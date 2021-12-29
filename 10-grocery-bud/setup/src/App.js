@@ -17,16 +17,27 @@ function App() {
   // submit
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+    
     if (!name) {
       // setAlert({ show: true, type: "danger", msg: "message" });
-      showAlert(true, "danger", "please enter a grocery item name");
-    } else if (!name && isEditing) {
+      showAlert(true, "danger", "please enter a grocery item");
+      console.log("empty field");
+      //
+    } else if (name && isEditing) {
+      console.log("edit->", name);
+      //
+    } else {
+      // console.log("add->", name);
+      const newId = new Date().getTime().toString();
+      const newList = [...list, { id: newId, title: name }];
+      // console.log(newList);
+      setList(newList);
+      showAlert(true, "success", "new grocery item added");
+      setName("");
     }
-    console.log("name");
   };
 
-  // show Alert params
+  // showAlert params
   const showAlert = (show = false, type = "", msg = "") => {
     return setAlert({ show, type, msg });
   };
@@ -41,6 +52,7 @@ function App() {
             type="text"
             className="grocery"
             placeholder="e.g. eggs"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
