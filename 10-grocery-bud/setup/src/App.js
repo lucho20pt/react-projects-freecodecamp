@@ -28,7 +28,7 @@ function App() {
 
       const newList = list.map((item) => {
         if (item.id === editID) {
-         return {...item, title: name};
+          return { ...item, title: name };
         }
         return item;
       });
@@ -36,7 +36,7 @@ function App() {
       setIsEditing(false);
       setEditID(null);
       setName("");
-      showAlert(true, 'success', 'item updated');
+      showAlert(true, "success", "item updated");
       //
     } else {
       // console.log("add->", name);
@@ -52,6 +52,7 @@ function App() {
   // CLEAR items list
   const clearItemsList = () => {
     setList("");
+    showAlert(true, "danger", "Cleared Grocery Items List");
   };
 
   // EDIT Item
@@ -78,19 +79,11 @@ function App() {
     return setAlert({ show, type, msg });
   };
 
-  // clear Alert
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      showAlert();
-    }, 2500);
-    return () => clearTimeout(timeout);
-  }, [alert]);
-
   return (
     <section className="section-center">
       <form className="grocery-form" onSubmit={onSubmitHandler}>
         <h3>grocery bud</h3>
-        {alert.show && <Alert {...alert} />}
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <div className="form-control">
           <input
             type="text"
