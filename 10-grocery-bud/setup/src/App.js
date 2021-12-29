@@ -24,8 +24,16 @@ function App() {
       console.log("empty field");
       //
     } else if (name && isEditing) {
-      console.log("edit->", name, editID);
+      // console.log("if isEditing");
 
+      const newList = list.map((item) => {
+        if (item.id === editID) {
+          item.title = name;
+        }
+        return item;
+      });
+      setList(newList);
+      setIsEditing(false);
       //
     } else {
       // console.log("add->", name);
@@ -36,6 +44,15 @@ function App() {
       showAlert(true, "success", "new grocery item added");
       setName("");
     }
+  };
+
+  // EDIT Item
+  const editItemHandler = (id) => {
+    // console.log(id);
+    const editItem = list.find((item) => item.id === id);
+    setIsEditing(true);
+    setEditID(id);
+    setName(editItem.title);
   };
 
   // REMOVE Item
@@ -84,7 +101,11 @@ function App() {
 
       <div className="grocery-container">
         {list.length > 0 && (
-          <List items={list} removeItem={removeItemHandler} />
+          <List
+            items={list}
+            removeItem={removeItemHandler}
+            editItem={editItemHandler}
+          />
         )}
         <button className="clear-btn">clear items</button>
       </div>
