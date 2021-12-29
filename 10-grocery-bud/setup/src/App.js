@@ -34,6 +34,7 @@ function App() {
       });
       setList(newList);
       setIsEditing(false);
+      setName("");
       //
     } else {
       // console.log("add->", name);
@@ -44,6 +45,11 @@ function App() {
       showAlert(true, "success", "new grocery item added");
       setName("");
     }
+  };
+
+  // CLEAR items list
+  const clearItemsList = () => {
+    setList("");
   };
 
   // EDIT Item
@@ -107,7 +113,9 @@ function App() {
             editItem={editItemHandler}
           />
         )}
-        <button className="clear-btn">clear items</button>
+        <button className="clear-btn" onClick={clearItemsList}>
+          clear items
+        </button>
       </div>
     </section>
   );
