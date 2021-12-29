@@ -28,12 +28,13 @@ function App() {
 
       const newList = list.map((item) => {
         if (item.id === editID) {
-          item.title = name;
+         return {...item, title: name};
         }
         return item;
       });
       setList(newList);
       setIsEditing(false);
+      setEditID(null);
       setName("");
       //
     } else {
